@@ -3,12 +3,11 @@
 This repository contains our work on Speech emotion recognition using emodb dataset. This dataset is available here [Emo-db](http://www.emodb.bilderbar.info/download/)
 
 ### Prerequisites
-Linux (preferable Ubuntu LTS). Python2.x 
+Lnux (preferable Ubuntu LTS). Python2.x 
 
 ### Installing dependencies
 *Note*: You can skip this step, if you are installing the packages. 
 Dependencies are listed below and in the `requirements.txt` file.
-
 * h5py
 * Keras
 * scipy
