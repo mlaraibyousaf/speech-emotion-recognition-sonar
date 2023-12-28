@@ -11,8 +11,6 @@ jobs:
           fetch-depth: 0
 
       - name: create-sonar-project
-  # You may pin to the exact commit or the version.
-  # uses: nelsoncanarinho/setup-sonar-action@f7a2abce6274755ad1d7a41ea76299bcd98a0c96
         uses: nelsoncanarinho/setup-sonar-action@v1.0.0
         with:
           # Sonar custom name for the project. Default is the repo name.
@@ -21,5 +19,13 @@ jobs:
           SONAR_DEFAULT_BRANCH: master
           # Sonar token used to integrate with SonarCloud api.
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
-     
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.organization=${{steps.setupSonar.outputs.SONAR_ORGANIZATION}}
+            -Dsonar.projectKey=${{steps.setupSonar.outputs.SONAR_PROJECT_KEY}}
+            -Dsonar.qualitygate.wait=true ## Failed analysis will fail the action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
