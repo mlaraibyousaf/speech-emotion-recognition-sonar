@@ -19,13 +19,11 @@ jobs:
           SONAR_DEFAULT_BRANCH: master
           # Sonar token used to integrate with SonarCloud api.
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
+      - uses: actions/checkout@v3
         with:
-          args: >
-            -Dsonar.organization=${{steps.setupSonar.outputs.SONAR_ORGANIZATION}}
-            -Dsonar.projectKey=${{steps.setupSonar.outputs.SONAR_PROJECT_KEY}}
-            -Dsonar.qualitygate.wait=true ## Failed analysis will fail the action
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
