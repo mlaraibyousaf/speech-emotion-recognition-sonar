@@ -21,7 +21,7 @@ jobs:
           # Name of the organization configured in Sonar. Default is the repo owner.
           SONAR_ORGANIZATION: mlaraibyousaf
           # Name of the main branch of the project
-          SONAR_DEFAULT_BRANCH: # optional, default is main
+          SONAR_DEFAULT_BRANCH: master
           # Sonar token used to integrate with SonarCloud api.
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           
