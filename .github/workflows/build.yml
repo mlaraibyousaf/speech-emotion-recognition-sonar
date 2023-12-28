@@ -16,19 +16,15 @@ jobs:
         uses: nelsoncanarinho/setup-sonar-action@v1.0.0
         with:
           # Sonar custom name for the project. Default is the repo name.
-          SONAR_PROJECT_NAME: ${{ github.repository }}
-          SONAR_PROJECT_KEY: ${{ github.repository }}
+          SONAR_PROJECT_NAME: test
+          # Sonar custom project key. Default is the repo name.
+          SONAR_PROJECT_KEY: test
           # Name of the organization configured in Sonar. Default is the repo owner.
           SONAR_ORGANIZATION: mlaraibyousaf
           # Name of the main branch of the project
           SONAR_DEFAULT_BRANCH: master
           # Sonar token used to integrate with SonarCloud api.
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
-      # - name: SonarCloud Scan
-      #   uses: SonarSource/sonarcloud-github-action@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                
 
           
