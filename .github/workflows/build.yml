@@ -15,6 +15,8 @@ jobs:
   # uses: nelsoncanarinho/setup-sonar-action@f7a2abce6274755ad1d7a41ea76299bcd98a0c96
         uses: nelsoncanarinho/setup-sonar-action@v1.0.0
         with:
+          SONAR_PROJECT_NAME: ${{ github.repository }}
+          SONAR_PROJECT_KEY: ${{ github.repository }}
           # Name of the main branch of the project
           SONAR_DEFAULT_BRANCH: master
           # Sonar token used to integrate with SonarCloud api.
