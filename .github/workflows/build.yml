@@ -1,23 +1,30 @@
-name: Build
 on:
   push:
     branches:
       - master
-  pull_request:
-    types: [opened, synchronize, reopened]
 jobs:
   sonarcloud:
-    name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Setup SonarCloud
+          fetch-depth: 0
+
+      - name: Setup Sonar
+        id: setupSonar
         uses: nelsoncanarinho/setup-sonar@v1.0.0
         with:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      
- 
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.organization=${{steps.setupSonar.outputs.SONAR_ORGANIZATION}}
+            -Dsonar.projectKey=${{steps.setupSonar.outputs.SONAR_PROJECT_KEY}}
+            -Dsonar.qualitygate.wait=true ## Failed analysis will fail the action
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
